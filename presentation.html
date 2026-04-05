@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stack — Presentation</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+    }
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 80px;
+      background: linear-gradient(135deg, #0a1f28 0%, #071820 50%, #0a0a0a 100%);
+      border-bottom: 2px solid #22d3c5;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(34, 211, 197, 0.15), transparent 70%);
+      border-radius: 50%;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 30px;
+      right: 40px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    h1 {
+      font-size: 64px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #22d3c5, #62f5df);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    h2 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: #22d3c5;
+    }
+
+    h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #9dd6d0;
+    }
+
+    p, li {
+      font-size: 22px;
+      line-height: 1.6;
+      color: #eefefd;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 28px;
+      color: #9dd6d0;
+      margin-bottom: 40px;
+    }
+
+    .meta {
+      font-size: 20px;
+      color: #666;
+      margin-top: 40px;
+    }
+
+    .meta span {
+      color: #22d3c5;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul li {
+      padding-left: 30px;
+      position: relative;
+    }
+
+    ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: #22d3c5;
+      font-weight: bold;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(34, 211, 197, 0.2);
+      border-radius: 16px;
+      padding: 30px;
+    }
+
+    .card h3 {
+      margin-bottom: 15px;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .feature-item {
+      background: rgba(34, 211, 197, 0.05);
+      border-left: 3px solid #22d3c5;
+      padding: 15px 20px;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .feature-item strong {
+      color: #22d3c5;
+    }
+
+    .links-grid {
+      display: grid;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px 25px;
+      border-radius: 12px;
+      border: 1px solid rgba(34, 211, 197, 0.15);
+    }
+
+    .link-item a {
+      color: #22d3c5;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .link-item .qr-placeholder {
+      width: 80px;
+      height: 80px;
+      background: #fff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 10px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .demo-note {
+      background: rgba(34, 211, 197, 0.1);
+      border: 1px solid rgba(34, 211, 197, 0.3);
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 30px;
+      font-size: 18px;
+      color: #62f5df;
+    }
+
+    @media print {
+      .slide {
+        page-break-after: always;
+        border-bottom: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Slide 1: Title -->
+  <div class="slide">
+    <h1>Stack</h1>
+    <p class="subtitle">CS2 Teammate Finder</p>
+    <div class="meta">
+      <p><span>Name:</span> David Danielian</p>
+      <p><span>Email:</span> d.danielian@innopolis.university</p>
+      <p><span>Group:</span> DSAI-02</p>
+    </div>
+    <div class="slide-number">1 / 5</div>
+  </div>
+
+  <!-- Slide 2: Context -->
+  <div class="slide">
+    <h2>Context</h2>
+    
+    <div class="grid-2">
+      <div class="card">
+        <h3>🎯 End User</h3>
+        <p>CS2 players, primarily students and casual-to-competitive gamers, who want to build a reliable team for Faceit matchmaking.</p>
+      </div>
+      
+      <div class="card">
+        <h3>⚡ Problem</h3>
+        <p>Solo queue matches players with random teammates who differ in skill, language, availability, or attitude — leading to frustrating matches.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 30px;">
+      <h3>💡 The Product Idea</h3>
+      <p>A web dashboard where CS2 players post profiles and discover compatible teammates by skill level, role, language, and playtime — connecting via Discord.</p>
+    </div>
+
+    <div class="slide-number">2 / 5</div>
+  </div>
+
+  <!-- Slide 3: Implementation -->
+  <div class="slide">
+    <h2>Implementation</h2>
+    
+    <h3>How We Built It</h3>
+    <ul>
+      <li><strong>Frontend:</strong> Vanilla HTML/CSS/JavaScript with responsive design</li>
+      <li><strong>Backend:</strong> Node.js + Express REST API</li>
+      <li><strong>Database:</strong> PostgreSQL with session-based ownership</li>
+      <li><strong>Deployment:</strong> Docker Compose (3 services)</li>
+    </ul>
+
+    <h3 style="margin-top: 30px;">Version 1 vs Version 2</h3>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Version 1 (Core)</h3>
+        <ul>
+          <li>Player profile CRUD via API</li>
+          <li>Filterable player directory</li>
+          <li>Session-based profile management</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Version 2 (Polish)</h3>
+        <ul>
+          <li>Dockerized all services</li>
+          <li>Deployed to VM with Nginx</li>
+          <li>Addressed TA feedback</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="slide-number">3 / 5</div>
+  </div>
+
+  <!-- Slide 4: Demo -->
+  <div class="slide">
+    <h2>Demo</h2>
+    
+    <div class="demo-note">
+      🎬 <strong>Video Demo:</strong> Pre-recorded video demonstration of Product Version 2 with voice commentary (under 2 minutes).
+    </div>
+
+    <div class="card" style="margin-top: 30px; text-align: center; padding: 60px;">
+      <p style="font-size: 48px; margin-bottom: 20px;">📹</p>
+      <p style="color: #666;">[ Embed or link your demo video here ]</p>
+      <p style="color: #666; font-size: 16px; margin-top: 10px;">Record using OBS, Loom, or similar tool</p>
+    </div>
+
+    <div class="slide-number">4 / 5</div>
+  </div>
+
+  <!-- Slide 5: Links -->
+  <div class="slide">
+    <h2>Links</h2>
+    
+    <div class="links-grid">
+      <div class="link-item">
+        <div class="qr-placeholder">QR<br>Code</div>
+        <div>
+          <p style="font-size: 16px; color: #666; margin-bottom: 5px;">GitHub Repository</p>
+          <a href="https://github.com/YOUR_USERNAME/se-toolkit-hackathon" target="_blank">github.com/YOUR_USERNAME/se-toolkit-hackathon</a>
+        </div>
+      </div>
+      
+      <div class="link-item">
+        <div class="qr-placeholder">QR<br>Code</div>
+        <div>
+          <p style="font-size: 16px; color: #666; margin-bottom: 5px;">Deployed Product</p>
+          <a href="http://YOUR_VM_IP" target="_blank">http://YOUR_VM_IP</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-number">5 / 5</div>
+  </div>
+
+</body>
+</html>

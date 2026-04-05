@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stack — найди тиммейтов для CS2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="site-toast" id="siteToast" hidden aria-live="polite"></div>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
+
+  <header class="hero">
+    <nav class="nav container">
+      <div class="logo">Stack - удобный сервис для поиска тиммейтов в CS2</div>
+      <div class="nav-links">
+        <a href="#how-it-works">Как это работает</a>
+        <a href="#profiles">Игроки</a>
+        <a href="#join">Заполнить анкету</a>
+      </div>
+    </nav>
+
+    <div class="hero-content container">
+      <div class="hero-text">
+        <h1>Собери нормальный стак и забудь про токсичных рандомов</h1>
+        <p>
+          Stack — это сервис, где игроки могут быстро находить тиммейтов по уровню,
+          роли, языку и вайбу. Достаточно лишь указать информацию о себе и найти подходящих игроков.
+        </p>
+
+        <div class="hero-points">
+          <div class="hero-point">
+            <span class="hero-point-dot"></span>
+            <span>Подбор по уровню, роли и стилю игры</span>
+          </div>
+          <div class="hero-point">
+            <span class="hero-point-dot"></span>
+            <span>Никакой регистрации и лишних действий</span>
+          </div>
+        </div>
+
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="#join">Заполнить анкету</a>
+          <a class="btn btn-secondary" href="#profiles">Найти тиммейтов</a>
+        </div>
+      </div>
+
+      <div class="hero-card-wrap">
+        <div class="hero-card-glow"></div>
+        <div class="hero-card">
+          <div class="mini-card-header">
+            <span class="status-dot"></span>
+            <span>Сейчас ищет пати</span>
+          </div>
+
+          <div class="player-preview">
+            <div class="avatar">E</div>
+            <div>
+              <h3>EdgarRush</h3>
+              <p>Faceit 7 • Rifler</p>
+            </div>
+          </div>
+
+          <div class="tags">
+            <span>RU / EN</span>
+            <span>Chill + try win</span>
+            <span>Mic on</span>
+          </div>
+
+          <div class="card-stats">
+            <div>
+              <strong>5–8</strong>
+              <span>lvl Faceit</span>
+            </div>
+            <div>
+              <strong>RU/EN</strong>
+              <span>язык</span>
+            </div>
+            <div>
+              <strong>19:00–01:00</strong>
+              <span>удобное время</span>
+            </div>
+          </div>
+
+          <button class="btn btn-primary full-width" onclick="scrollToForm()">Хочу так же</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="how-it-works" class="section container">
+      <div class="section-heading">
+        <h2>Как это работает</h2>
+        <p>Идея очень простая: игрок оставляет анкету и она сразу появляется в списке ниже.</p>
+      </div>
+
+      <div class="steps">
+        <article class="step-card">
+          <div class="step-number">1</div>
+          <h3>Заполни анкету</h3>
+          <p>Укажи ник, уровень Faceit, роль, язык, стиль игры и Discord.</p>
+        </article>
+        <article class="step-card">
+          <div class="step-number">2</div>
+          <h3>Появись в списке</h3>
+          <p>После отправки твоя карточка моментально попадает в общий список игроков.</p>
+        </article>
+        <article class="step-card accent-card">
+          <div class="step-number">3</div>
+          <h3>Собери свой стак</h3>
+          <p>Другие игроки находят тебя в списке и связываются через Discord.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="profiles" class="section section-alt">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Игроки, которые ищут пати</h2>
+        </div>
+
+        <div class="profiles-toolbar">
+          <div class="profiles-toolbar-top">
+            <button type="button" class="filter-chip" id="filterOwnBtn">Только мои анкеты</button>
+          </div>
+
+          <div class="profiles-toolbar-bottom">
+            <div class="filters">
+            <div class="filter-dropdown" data-filter-dropdown="language">
+              <button type="button" class="filter-trigger" id="filterLanguageTrigger" data-filter-trigger="language">
+                <span>Все языки</span>
+              </button>
+              <div class="filter-menu" id="filterLanguageMenu" hidden>
+                <button type="button" class="filter-option is-selected" data-filter-name="language" data-value="all">Все языки</button>
+                <button type="button" class="filter-option" data-filter-name="language" data-value="RU">RU</button>
+                <button type="button" class="filter-option" data-filter-name="language" data-value="EN">EN</button>
+                <button type="button" class="filter-option" data-filter-name="language" data-value="RU / EN">RU / EN</button>
+              </div>
+            </div>
+
+            <div class="filter-dropdown" data-filter-dropdown="role">
+              <button type="button" class="filter-trigger" id="filterRoleTrigger" data-filter-trigger="role">
+                <span>Все роли</span>
+              </button>
+              <div class="filter-menu" id="filterRoleMenu" hidden>
+                <button type="button" class="filter-option is-selected" data-filter-name="role" data-value="all">Все роли</button>
+                <button type="button" class="filter-option" data-filter-name="role" data-value="Entry">Entry</button>
+                <button type="button" class="filter-option" data-filter-name="role" data-value="Rifler">Rifler</button>
+                <button type="button" class="filter-option" data-filter-name="role" data-value="AWP">AWP</button>
+                <button type="button" class="filter-option" data-filter-name="role" data-value="Support">Support</button>
+                <button type="button" class="filter-option" data-filter-name="role" data-value="Lurker">Lurker</button>
+                <button type="button" class="filter-option" data-filter-name="role" data-value="Any">Any</button>
+              </div>
+            </div>
+
+            <div class="filter-dropdown" data-filter-dropdown="style">
+              <button type="button" class="filter-trigger" id="filterStyleTrigger" data-filter-trigger="style">
+                <span>Любой стиль</span>
+              </button>
+              <div class="filter-menu" id="filterStyleMenu" hidden>
+                <button type="button" class="filter-option is-selected" data-filter-name="style" data-value="all">Любой стиль</button>
+                <button type="button" class="filter-option" data-filter-name="style" data-value="Chill">Chill</button>
+                <button type="button" class="filter-option" data-filter-name="style" data-value="Tryhard">Tryhard</button>
+                <button type="button" class="filter-option" data-filter-name="style" data-value="Chill + try win">Chill + try win</button>
+              </div>
+            </div>
+
+            <div class="filter-dropdown age-filter-dropdown" data-filter-dropdown="level">
+              <button type="button" class="filter-trigger" id="filterLevelTrigger" data-filter-trigger="level">
+                <span>Level faceit</span>
+              </button>
+              <div class="filter-menu age-filter-menu" id="filterLevelMenu" hidden>
+                <div class="age-filter">
+                  <input type="number" id="filterLevelMin" min="0" max="10" placeholder="От" />
+                  <input type="number" id="filterLevelMax" min="0" max="10" placeholder="До" />
+                </div>
+                <button type="button" class="age-filter-reset" id="filterLevelReset">Сбросить</button>
+              </div>
+            </div>
+
+            <div class="filter-dropdown age-filter-dropdown" data-filter-dropdown="age">
+              <button type="button" class="filter-trigger" id="filterAgeTrigger" data-filter-trigger="age">
+                <span>Возраст</span>
+              </button>
+              <div class="filter-menu age-filter-menu" id="filterAgeMenu" hidden>
+                <div class="age-filter">
+                  <input type="number" id="filterAgeMin" min="0" max="99" placeholder="От" />
+                  <input type="number" id="filterAgeMax" min="0" max="99" placeholder="До" />
+                </div>
+                <button type="button" class="age-filter-reset" id="filterAgeReset">Сбросить</button>
+              </div>
+            </div>
+            </div>
+
+            <div class="sort-controls">
+              <div class="filter-dropdown sort-dropdown" data-filter-dropdown="sort">
+                <button type="button" class="filter-trigger" id="filterSortTrigger" data-filter-trigger="sort">
+                  <span>Сортировка</span>
+                </button>
+                <div class="filter-menu" id="filterSortMenu" hidden>
+                  <button type="button" class="filter-option is-selected" data-filter-name="sort" data-value="default">Сначала новые</button>
+                  <button type="button" class="filter-option" data-filter-name="sort" data-value="age-desc">Возраст: сначала старше</button>
+                  <button type="button" class="filter-option" data-filter-name="sort" data-value="age-asc">Возраст: сначала младше</button>
+                  <button type="button" class="filter-option" data-filter-name="sort" data-value="level-desc">Faceit: высокий level</button>
+                  <button type="button" class="filter-option" data-filter-name="sort" data-value="level-asc">Faceit: низкий level</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="playersGrid" class="players-grid"></div>
+      </div>
+    </section>
+
+    <section id="join" class="section container">
+      <div class="section-heading">
+        <h2>Заполнить анкету</h2>
+      </div>
+
+      <form id="playerForm" class="player-form" novalidate>
+        <div class="form-grid">
+          <label>
+            Никнейм
+            <input type="text" id="nickname" placeholder="Например, EdgarRush" required />
+          </label>
+
+          <label>
+            Faceit Level
+            <input type="number" id="level" min="0" max="10" placeholder="От 0 до 10" required />
+          </label>
+
+          <label>
+            Возраст
+            <input type="number" id="age" min="0" max="99" placeholder="Например, 19" required />
+          </label>
+
+          <div class="form-field">
+            <span>Язык</span>
+            <div class="language-buttons" role="group" aria-label="Выбор языка">
+              <button type="button" class="language-btn" data-language="RU">RU</button>
+              <button type="button" class="language-btn" data-language="EN">EN</button>
+              <button type="button" class="language-btn" data-language="RU / EN">RU / EN</button>
+            </div>
+            <span id="languageError" class="choice-error" aria-live="polite"></span>
+            <input type="hidden" id="language" value="" required />
+          </div>
+
+          <div class="form-field">
+            <span>Роль в игре</span>
+            <div class="role-buttons" role="group" aria-label="Выбор роли">
+              <button type="button" class="role-btn" data-role="Entry">Entry</button>
+              <button type="button" class="role-btn" data-role="Rifler">Rifler</button>
+              <button type="button" class="role-btn" data-role="AWP">AWP</button>
+              <button type="button" class="role-btn" data-role="Support">Support</button>
+              <button type="button" class="role-btn" data-role="Lurker">Lurker</button>
+              <button type="button" class="role-btn" data-role="Any">Any</button>
+            </div>
+            <input type="hidden" id="role" value="Any" required />
+          </div>
+
+          <div class="form-field">
+            <span>Стиль игры</span>
+            <div class="style-buttons" role="group" aria-label="Выбор стиля игры">
+              <button type="button" class="style-btn" data-style="Chill">Chill</button>
+              <button type="button" class="style-btn" data-style="Tryhard">Tryhard</button>
+              <button type="button" class="style-btn" data-style="Chill + try win">Chill + try win</button>
+            </div>
+            <span id="styleError" class="choice-error" aria-live="polite"></span>
+            <input type="hidden" id="style" value="" required />
+          </div>
+
+          <label>
+            Игровое время
+            <div class="input-with-action">
+              <div class="playtime-group" id="playtimeGroup">
+                <input type="text" id="playtimeStartHour" class="playtime-part" inputmode="numeric" maxlength="2" placeholder="ЧЧ" value="00" aria-label="Часы начала" />
+                <span class="playtime-separator">:</span>
+                <input type="text" id="playtimeStartMinute" class="playtime-part" inputmode="numeric" maxlength="2" placeholder="ММ" value="00" aria-label="Минуты начала" />
+                <span class="playtime-separator">-</span>
+                <input type="text" id="playtimeEndHour" class="playtime-part" inputmode="numeric" maxlength="2" placeholder="ЧЧ" value="00" aria-label="Часы конца" />
+                <span class="playtime-separator">:</span>
+                <input type="text" id="playtimeEndMinute" class="playtime-part" inputmode="numeric" maxlength="2" placeholder="ММ" value="00" aria-label="Минуты конца" />
+              </div>
+              <button type="button" class="inline-action-btn is-active" id="playtimeAnyBtn">Любое</button>
+            </div>
+            <span id="playtimeError" class="choice-error" aria-live="polite"></span>
+            <input type="hidden" id="playtime" value="" required />
+          </label>
+
+          <label>
+            Discord
+            <input type="text" id="discord" placeholder="Например, @edgar" required />
+          </label>
+        </div>
+
+        <label>
+          Коротко о себе
+          <textarea id="bio" rows="4" placeholder="Например: Ищу не токсичных ребят на Faceit 5–8, играю спокойно, но на победу"></textarea>
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="submitFormBtn">Добавить анкету</button>
+          <button type="button" class="btn btn-secondary" id="clearDataBtn">Очистить мои анкеты</button>
+          <button type="button" class="btn btn-secondary" id="cancelEditBtn" hidden>Отменить редактирование</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Stack</strong>
+        <p>Сервис для поиска тиммейтов в CS2</p>
+      </div>
+      <div class="footer-contacts">
+        <strong>Контакты:</strong>
+        <div class="footer-contacts-links">
+          <a href="tel:+79504628262">+7(950)462-82-62</a>
+          <a href="mailto:davuska06.david@yandex.ru">davuska06.david@yandex.ru</a>
+          <a href="https://discord.com/users/Davidkaaa33" target="_blank" rel="noreferrer">Discord: Davidkaaa33</a>
+          <a href="https://t.me/Dava_Djan" target="_blank" rel="noreferrer">t.me/Dava_Djan</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="confirm-modal" id="clearConfirmModal" hidden>
+    <div class="confirm-modal-backdrop" data-close-modal="true"></div>
+    <div class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="clearConfirmTitle">
+      <h3 id="clearConfirmTitle">Уверены, что хотите удалить все свои анкеты?</h3>
+      <div class="confirm-actions">
+        <button type="button" class="btn btn-primary" id="cancelClearBtn">Нет</button>
+        <button type="button" class="btn btn-secondary" id="confirmClearBtn">Да</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="confirm-modal" id="existingProfileModal" hidden>
+    <div class="confirm-modal-backdrop" data-close-existing-modal="true"></div>
+    <div class="confirm-dialog existing-profile-dialog" role="dialog" aria-modal="true" aria-labelledby="existingProfileTitle">
+      <h3 id="existingProfileTitle">У Вас уже есть анкеты</h3>
+      <div class="confirm-actions" id="existingProfileActions">
+        <button type="button" class="btn btn-secondary" id="editExistingProfileBtn">Редактировать старую</button>
+        <button type="button" class="btn btn-secondary" id="createNewProfileBtn">Создать новую</button>
+      </div>
+      <div class="edit-profile-list" id="editProfileList" hidden></div>
+    </div>
+  </div>
+
+  <div class="confirm-modal" id="playerProfileModal" hidden>
+    <div class="confirm-modal-backdrop" data-close-player-profile="true"></div>
+    <div class="confirm-dialog player-profile-dialog" role="dialog" aria-modal="true" aria-labelledby="playerProfileDiscord">
+      <div id="playerProfileContent"></div>
+    </div>
+  </div>
+
+  <div class="confirm-modal" id="deleteProfileModal" hidden>
+    <div class="confirm-modal-backdrop" data-close-delete-profile="true"></div>
+    <div class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="deleteProfileTitle">
+      <h3 id="deleteProfileTitle">Уверены, что хотите удалить анкету?</h3>
+      <div class="confirm-actions">
+        <button type="button" class="btn btn-primary" id="cancelDeleteProfileBtn">Нет</button>
+        <button type="button" class="btn btn-secondary" id="confirmDeleteProfileBtn">Да</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script-api.js"></script>
+</body>
+</html>
