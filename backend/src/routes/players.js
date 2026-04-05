@@ -70,7 +70,12 @@ router.get('/', async (req, res) => {
     const query = `SELECT * FROM players ${whereClause} ORDER BY ${orderBy}`;
     const result = await db.query(query, params);
 
-    res.json(result.rows);
+    const players = result.rows.map((player) => ({
+      ...player,
+      isOwn: player.session_id === req.sessionId,
+    }));
+
+    res.json(players);
   } catch (error) {
     console.error('Error fetching players:', error.message);
     res.status(500).json({ error: 'Failed to fetch players' });
