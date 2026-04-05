@@ -1,5 +1,76 @@
 const API_URL = window.location.origin;
 
+// Language toggle
+let currentLang = 'en';
+
+function switchLanguage(lang) {
+  currentLang = lang;
+  const toggle = document.getElementById('langToggle');
+  if (!toggle) return;
+
+  toggle.textContent = lang === 'en' ? 'EN' : 'RU';
+
+  // Toggle text content
+  document.querySelectorAll('[data-ru]').forEach((el) => {
+    if (lang === 'ru') {
+      el.dataset.en = el.textContent;
+      el.textContent = el.dataset.ru;
+    } else {
+      if (el.dataset.en) {
+        el.textContent = el.dataset.en;
+      }
+    }
+  });
+
+  // Toggle placeholders
+  document.querySelectorAll('[data-placeholder-ru]').forEach((el) => {
+    if (lang === 'ru') {
+      el.dataset.placeholderEn = el.placeholder;
+      el.placeholder = el.dataset.placeholderRu;
+    } else {
+      if (el.dataset.placeholderEn) {
+        el.placeholder = el.dataset.placeholderEn;
+      }
+    }
+  });
+
+  // Toggle sort filter labels
+  const sortOptions = document.querySelectorAll('#filterSortMenu .filter-option');
+  sortOptions.forEach((opt) => {
+    if (opt.dataset.ru) {
+      if (lang === 'ru') {
+        opt.dataset.en = opt.textContent;
+        opt.textContent = opt.dataset.ru;
+      } else if (opt.dataset.en) {
+        opt.textContent = opt.dataset.en;
+      }
+    }
+  });
+
+  // Update sort trigger label if it has stored translations
+  const sortTrigger = document.querySelector('[data-filter-trigger="sort"] span');
+  if (sortTrigger && sortTrigger.dataset.ru) {
+    sortTrigger.textContent = lang === 'ru' ? sortTrigger.dataset.ru : sortTrigger.dataset.en;
+  }
+
+  // Update empty state if visible
+  const emptyState = document.querySelector('.empty-state');
+  if (emptyState) {
+    const enMsg = 'No one found with these filters. Try changing filters or add a new profile.';
+    const ruMsg = 'По этим фильтрам пока никого нет. Попробуй изменить фильтры или добавь новую анкету.';
+    if (lang === 'ru') {
+      emptyState.dataset.en = enMsg;
+      emptyState.textContent = ruMsg;
+    } else {
+      emptyState.textContent = emptyState.dataset.en || enMsg;
+    }
+  }
+}
+
+document.getElementById('langToggle')?.addEventListener('click', () => {
+  switchLanguage(currentLang === 'en' ? 'ru' : 'en');
+});
+
 const defaultPlayers = [];
 
 const playersGrid = document.getElementById('playersGrid');
@@ -658,7 +729,10 @@ function renderPlayers() {
   });
 
   if (!filteredPlayers.length) {
-    playersGrid.innerHTML = '<div class="empty-state">По этим фильтрам пока никого нет. Попробуй изменить фильтры или добавь новую анкету.</div>';
+    const emptyMsg = currentLang === 'ru'
+      ? 'По этим фильтрам пока никого нет. Попробуй изменить фильтры или добавь новую анкету.'
+      : 'No one found with these filters. Try changing filters or add a new profile.';
+    playersGrid.innerHTML = `<div class="empty-state" data-en="${emptyMsg}">${emptyMsg}</div>`;
     return;
   }
 
@@ -679,7 +753,7 @@ function renderPlayerProfile(player) {
       <button type="button" class="player-profile-close" id="playerProfileClose" aria-label="Закрыть">×</button>
     </div>
     <div class="player-profile-body">
-      <p>${player.bio || 'Игрок пока ничего не написал о себе.'}</p>
+      <p>${player.bio || (currentLang === 'ru' ? 'Игрок пока ничего не написал о себе.' : 'Player hasn\'t written anything yet.')}</p>
       <div class="player-tags">
         <span>${player.language}</span>
         <span>${player.style}</span>
@@ -690,8 +764,8 @@ function renderPlayerProfile(player) {
 
   playerProfileContent.querySelector('#playerProfileDiscord')?.addEventListener('click', () => {
     navigator.clipboard.writeText(player.discord)
-      .then(() => showToast(`${player.discord} скопирован`))
-      .catch(() => showToast(`Не удалось скопировать: ${player.discord}`));
+      .then(() => showToast(`${player.discord} ${currentLang === 'ru' ? 'скопирован' : 'copied'}`))
+      .catch(() => showToast(`${currentLang === 'ru' ? 'Не удалось скопировать' : 'Failed to copy'}: ${player.discord}`));
   });
 
   playerProfileContent.querySelector('#playerProfileClose')?.addEventListener('click', closePlayerProfileModal);
@@ -729,8 +803,8 @@ function closeDeleteProfileModal() {
 
 function copyDiscord(discord) {
   navigator.clipboard.writeText(discord)
-    .then(() => showToast(`${discord} скопирован`))
-    .catch(() => showToast(`Не удалось скопировать: ${discord}`));
+    .then(() => showToast(`${discord} ${currentLang === 'ru' ? 'скопирован' : 'copied'}`))
+    .catch(() => showToast(`${currentLang === 'ru' ? 'Не удалось скопировать' : 'Failed to copy'}: ${discord}`));
 }
 
 function scrollToForm() {
@@ -882,6 +956,11 @@ function setFilterValue(filterName, value, label) {
   const trigger = document.querySelector(`[data-filter-trigger="${filterName}"] span`);
   if (trigger) {
     trigger.textContent = label;
+    // Store the English label for language switching
+    if (filterName === 'sort') {
+      trigger.dataset.en = label;
+      trigger.dataset.ru = getCurrentRuLabel(filterName, value);
+    }
   }
 
   filterOptions
@@ -891,6 +970,19 @@ function setFilterValue(filterName, value, label) {
     });
 
   renderPlayers();
+}
+
+function getCurrentRuLabel(filterName, value) {
+  const ruMap = {
+    sort: {
+      'default': 'Сначала новые',
+      'age-desc': 'Возраст: сначала старше',
+      'age-asc': 'Возраст: сначала младше',
+      'level-desc': 'Faceit: высокий level',
+      'level-asc': 'Faceit: низкий level'
+    }
+  };
+  return (ruMap[filterName] && ruMap[filterName][value]) || '';
 }
 
 function setOwnOnlyFilter(isActive) {
@@ -940,7 +1032,7 @@ setupRangeFilter({
   triggerLabelNode: filterLevelTriggerLabel,
   stateMinKey: 'levelMin',
   stateMaxKey: 'levelMax',
-  defaultLabel: 'Задать level',
+  defaultLabel: 'Faceit level',
   maxValue: 10
 });
 
@@ -951,11 +1043,11 @@ setupRangeFilter({
   triggerLabelNode: filterAgeTriggerLabel,
   stateMinKey: 'ageMin',
   stateMaxKey: 'ageMax',
-  defaultLabel: 'Задать возраст',
+  defaultLabel: 'Age',
   maxValue: 99
 });
 
-filterSortTriggerLabel.textContent = 'Сначала новые';
+filterSortTriggerLabel.textContent = 'Newest first';
 
 // Form submission with API
 playerForm.addEventListener('submit', async (event) => {
@@ -985,13 +1077,13 @@ playerForm.addEventListener('submit', async (event) => {
       resetFormState({ emptyAfterReset: true });
       await loadAndRenderPlayers();
       document.getElementById('profiles').scrollIntoView({ behavior: 'smooth' });
-      showToast('Анкета успешно редактирована!');
+      showToast(currentLang === 'ru' ? 'Анкета успешно редактирована!' : 'Profile updated successfully!');
     } else {
       await createPlayer(formPlayer);
       resetFormState();
       await loadAndRenderPlayers();
       document.getElementById('profiles').scrollIntoView({ behavior: 'smooth' });
-      showToast('Анкета успешно добавлена!');
+      showToast(currentLang === 'ru' ? 'Анкета успешно добавлена!' : 'Profile added successfully!');
     }
   } catch (error) {
     console.error('Form submission error:', error);
@@ -1005,13 +1097,13 @@ playerForm.addEventListener('submit', async (event) => {
 cancelEditBtn.addEventListener('click', () => {
   resetFormState({ emptyAfterReset: true });
   document.getElementById('profiles').scrollIntoView({ behavior: 'smooth' });
-  showToast('Редактирование отменено!');
+  showToast(currentLang === 'ru' ? 'Редактирование отменено!' : 'Editing cancelled!');
 });
 
 clearDataBtn.addEventListener('click', () => {
   const ownPlayers = allPlayersCache.filter(p => p.isOwn);
   if (!ownPlayers.length) {
-    showToast('Нет активных анкет!');
+    showToast(currentLang === 'ru' ? 'Нет активных анкет!' : 'No active profiles!');
     return;
   }
 
@@ -1027,7 +1119,7 @@ confirmClearBtn.addEventListener('click', async () => {
     await loadAndRenderPlayers();
     closeClearConfirmModal();
     document.getElementById('join').scrollIntoView({ behavior: 'smooth' });
-    showToast('Ваши анкеты успешно очищены!');
+    showToast(currentLang === 'ru' ? 'Ваши анкеты успешно очищены!' : 'Your profiles cleared successfully!');
   } catch (error) {
     console.error('Error clearing profiles:', error);
     showToast(`Ошибка: ${error.message}`);
@@ -1120,7 +1212,7 @@ confirmDeleteProfileBtn.addEventListener('click', async () => {
 
     closeDeleteProfileModal();
     await loadAndRenderPlayers();
-    showToast('Анкета удалена!');
+    showToast(currentLang === 'ru' ? 'Анкета удалена!' : 'Profile deleted!');
   } catch (error) {
     console.error('Error deleting profile:', error);
     showToast(`Ошибка: ${error.message}`);

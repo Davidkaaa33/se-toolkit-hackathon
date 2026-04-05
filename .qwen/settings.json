@@ -15,7 +15,11 @@
       "Bash(git checkout *)",
       "Bash(brew *)",
       "Bash(git config *)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "Bash(docker compose up *)",
+      "Bash(docker compose *)",
+      "Bash(curl *)",
+      "Bash(python3 *)"
     ]
   },
   "$version": 3
