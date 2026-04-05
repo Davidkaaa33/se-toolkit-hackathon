@@ -49,7 +49,7 @@ function switchLanguage(lang) {
 
   // Update sort trigger label if it has stored translations
   const sortTrigger = document.querySelector('[data-filter-trigger="sort"] span');
-  if (sortTrigger && sortTrigger.dataset.ru) {
+  if (sortTrigger && sortTrigger.dataset.en && sortTrigger.dataset.ru) {
     sortTrigger.textContent = lang === 'ru' ? sortTrigger.dataset.ru : sortTrigger.dataset.en;
   }
 
@@ -206,6 +206,20 @@ async function deleteAllOwnPlayers() {
   return apiFetch('/api/players/session/all', { method: 'DELETE' });
 }
 
+// Error message translations
+function errorMsg(key) {
+  const messages = {
+    'fill-field': currentLang === 'ru' ? 'Заполните поле' : 'Please fill in this field',
+    'only-digits': currentLang === 'ru' ? 'Только цифры' : 'Only digits allowed',
+    'age-range': currentLang === 'ru' ? 'Введите значение от 0 до 99' : 'Enter a value from 0 to 99',
+    'level-range': currentLang === 'ru' ? 'Введите значение от 0 до 10' : 'Enter a value from 0 to 10',
+    'playtime-format': currentLang === 'ru' ? 'Введите время в формате ЧЧ:ММ - ЧЧ:ММ' : 'Enter time in HH:MM - HH:MM format',
+    'playtime-range': currentLang === 'ru' ? 'Часы: 00-23, минуты: 00-59' : 'Hours: 00-23, minutes: 00-59',
+    'select-field': currentLang === 'ru' ? 'Заполните поле' : 'Please select an option'
+  };
+  return messages[key] || '';
+}
+
 // UI Functions
 function selectLanguage(language) {
   languageInput.value = language;
@@ -274,7 +288,7 @@ function clearFieldError(field) {
 
 function showChoiceError(container, errorNode) {
   container.classList.add('choice-error-state');
-  errorNode.textContent = 'Заполните поле';
+  errorNode.textContent = errorMsg('select-field');
 }
 
 function clearChoiceError(container, errorNode) {
@@ -380,12 +394,12 @@ function validatePlaytimeField(options = {}) {
   }
 
   if (!startHoursRaw && !startMinutesRaw && !endHoursRaw && !endMinutesRaw) {
-    showPlaytimeError('Заполните поле', { focusField });
+    showPlaytimeError(errorMsg('fill-field'), { focusField });
     return false;
   }
 
   if ([startHoursRaw, startMinutesRaw, endHoursRaw, endMinutesRaw].some((value) => !/^\d{2}$/.test(value))) {
-    showPlaytimeError('Введите время в формате ЧЧ:ММ - ЧЧ:ММ', { focusField });
+    showPlaytimeError(errorMsg('playtime-format'), { focusField });
     return false;
   }
 
@@ -395,7 +409,7 @@ function validatePlaytimeField(options = {}) {
   const endMinutes = Number(endMinutesRaw);
 
   if (startHours > 23 || endHours > 23 || startMinutes > 59 || endMinutes > 59) {
-    showPlaytimeError('Часы: 00-23, минуты: 00-59', { focusField });
+    showPlaytimeError(errorMsg('playtime-range'), { focusField });
     return false;
   }
 
@@ -459,12 +473,12 @@ function validateRangeField(field, { min, max, emptyMessage, rangeMessage, focus
   const rawValue = field.value.trim();
 
   if (!rawValue) {
-    showFieldError(field, emptyMessage, { focusField });
+    showFieldError(field, errorMsg('fill-field'), { focusField });
     return false;
   }
 
   if (!/^\d+$/.test(rawValue)) {
-    showFieldError(field, 'Только цифры', { focusField });
+    showFieldError(field, errorMsg('only-digits'), { focusField });
     return false;
   }
 
@@ -485,8 +499,8 @@ ageInput.addEventListener('blur', () => {
   validateRangeField(ageInput, {
     min: 0,
     max: 99,
-    emptyMessage: 'Заполните поле',
-    rangeMessage: 'Введите значение от 0 до 99',
+    emptyMessage: errorMsg('fill-field'),
+    rangeMessage: errorMsg('age-range'),
     focusField: false
   });
 });
@@ -499,8 +513,8 @@ levelInput.addEventListener('blur', () => {
   validateRangeField(levelInput, {
     min: 0,
     max: 10,
-    emptyMessage: 'Заполните поле',
-    rangeMessage: 'Введите значение от 0 до 10',
+    emptyMessage: errorMsg('fill-field'),
+    rangeMessage: errorMsg('level-range'),
     focusField: false
   });
 });
@@ -510,15 +524,15 @@ function validateFormInOrder() {
   clearChoiceError(styleButtonsWrap, styleError);
 
   if (!nicknameInput.value.trim()) {
-    showFieldError(nicknameInput, 'Заполните поле');
+    showFieldError(nicknameInput, errorMsg('fill-field'));
     return false;
   }
 
   if (!validateRangeField(ageInput, {
     min: 0,
     max: 99,
-    emptyMessage: 'Заполните поле',
-    rangeMessage: 'Введите значение от 0 до 99'
+    emptyMessage: errorMsg('fill-field'),
+    rangeMessage: errorMsg('age-range')
   })) {
     return false;
   }
@@ -530,8 +544,8 @@ function validateFormInOrder() {
   if (!validateRangeField(levelInput, {
     min: 0,
     max: 10,
-    emptyMessage: 'Заполните поле',
-    rangeMessage: 'Введите значение от 0 до 10'
+    emptyMessage: errorMsg('fill-field'),
+    rangeMessage: errorMsg('level-range')
   })) {
     return false;
   }
@@ -549,7 +563,7 @@ function validateFormInOrder() {
   }
 
   if (!discordInput.value.trim() || discordInput.value.trim() === '@') {
-    showFieldError(discordInput, 'Заполните поле');
+    showFieldError(discordInput, errorMsg('fill-field'));
     return false;
   }
 
@@ -557,8 +571,9 @@ function validateFormInOrder() {
 }
 
 function createCard(player, options = {}) {
-  const { extraClass = '', ownerLabel = player.isOwn ? 'Моя анкета' : '', dataAttributes = '' } = options;
-  const playtimeLabel = player.playtime === 'Любое' ? 'Любое время' : player.playtime;
+  const ownerLabel = player.isOwn ? (currentLang === 'ru' ? 'Моя анкета' : 'My profile') : '';
+  const { extraClass = '', dataAttributes = '' } = options;
+  const playtimeLabel = player.playtime === 'Любое' ? (currentLang === 'ru' ? 'Любое время' : 'Any time') : player.playtime;
   const ownCardClass = player.isOwn ? ' player-card-own' : '';
   const className = `player-card${ownCardClass}${extraClass ? ` ${extraClass}` : ''}`;
   const ownerLabelAttribute = ownerLabel ? `data-owner-label="${ownerLabel}"` : '';
@@ -566,8 +581,8 @@ function createCard(player, options = {}) {
   const cardActions = player.isOwn && !extraClass.includes('edit-player-card')
     ? `
       <div class="card-owner-actions">
-        <button type="button" class="card-delete-btn" data-delete-card-id="${player.id}">Удалить</button>
-        <button type="button" class="card-edit-btn" data-edit-card-id="${player.id}">Редактировать</button>
+        <button type="button" class="card-delete-btn" data-delete-card-id="${player.id}">${currentLang === 'ru' ? 'Удалить' : 'Delete'}</button>
+        <button type="button" class="card-edit-btn" data-edit-card-id="${player.id}">${currentLang === 'ru' ? 'Редактировать' : 'Edit'}</button>
       </div>
     `
     : '';
@@ -578,7 +593,7 @@ function createCard(player, options = {}) {
         <div class="avatar-card">${player.nickname.charAt(0).toUpperCase()}</div>
         <div>
           <h3>${player.nickname}</h3>
-          <small>Faceit ${player.level} • ${player.role} • ${player.age} лет</small>
+          <small>Faceit ${player.level} • ${player.role} • ${player.age} ${currentLang === 'ru' ? 'лет' : 'years old'}</small>
         </div>
       </div>
 
@@ -640,13 +655,15 @@ function populateFormFromPlayer(player) {
 }
 
 function setFormEditingMode(isEditing) {
-  submitFormBtn.textContent = isEditing ? 'Сохранить изменения' : 'Добавить анкету';
+  submitFormBtn.textContent = isEditing
+    ? (currentLang === 'ru' ? 'Сохранить изменения' : 'Save changes')
+    : (currentLang === 'ru' ? 'Добавить анкету' : 'Add profile');
   clearDataBtn.hidden = isEditing;
   cancelEditBtn.hidden = !isEditing;
 }
 
 function openExistingProfileModal() {
-  existingProfileTitle.textContent = 'У Вас уже есть анкеты';
+  existingProfileTitle.textContent = currentLang === 'ru' ? 'У Вас уже есть анкеты' : 'You already have profiles';
   existingProfileActions.hidden = false;
   editProfileList.hidden = true;
   editProfileList.innerHTML = '';
@@ -660,7 +677,7 @@ function closeExistingProfileModal({ restoreFocus = true } = {}) {
   editProfileList.hidden = true;
   existingProfileActions.hidden = false;
   editProfileList.innerHTML = '';
-  existingProfileTitle.textContent = 'У Вас уже есть анкеты';
+  existingProfileTitle.textContent = currentLang === 'ru' ? 'У Вас уже есть анкеты' : 'You already have profiles';
   document.body.style.overflow = '';
   if (restoreFocus) {
     playerForm.querySelector('button[type="submit"]')?.focus();
@@ -670,7 +687,7 @@ function closeExistingProfileModal({ restoreFocus = true } = {}) {
 function renderEditableOwnProfiles(players) {
   editProfileList.innerHTML = players.map((player) => createCard(player, {
     extraClass: 'edit-player-card',
-    ownerLabel: 'Редактировать эту',
+    ownerLabel: currentLang === 'ru' ? 'Редактировать эту' : 'Edit this',
     dataAttributes: `data-edit-player-id="${player.id}"`
   })).join('');
 }
@@ -740,14 +757,14 @@ function renderPlayers() {
 }
 
 function renderPlayerProfile(player) {
-  const playtimeLabel = player.playtime === 'Любое' ? 'Любое время' : player.playtime;
+  const playtimeLabel = player.playtime === 'Любое' ? (currentLang === 'ru' ? 'Любое время' : 'Any time') : player.playtime;
   playerProfileContent.innerHTML = `
     <div class="player-profile-head">
       <div class="player-profile-identity">
         <div class="avatar-card">${player.nickname.charAt(0).toUpperCase()}</div>
         <div class="player-profile-meta">
           <button type="button" class="player-profile-discord" id="playerProfileDiscord" data-copy-label="Копировать">${player.discord}</button>
-          <small>${player.nickname} • Faceit ${player.level} • ${player.role} • ${player.age} лет</small>
+          <small>${player.nickname} • Faceit ${player.level} • ${player.role} • ${player.age} ${currentLang === 'ru' ? 'лет' : 'years old'}</small>
         </div>
       </div>
       <button type="button" class="player-profile-close" id="playerProfileClose" aria-label="Закрыть">×</button>
@@ -956,10 +973,13 @@ function setFilterValue(filterName, value, label) {
   const trigger = document.querySelector(`[data-filter-trigger="${filterName}"] span`);
   if (trigger) {
     trigger.textContent = label;
-    // Store the English label for language switching
+    // Store translations for sort filter
     if (filterName === 'sort') {
-      trigger.dataset.en = label;
-      trigger.dataset.ru = getCurrentRuLabel(filterName, value);
+      const clickedOption = document.querySelector(`.filter-option[data-filter-name="sort"][data-value="${value}"]`);
+      if (clickedOption) {
+        trigger.dataset.en = clickedOption.dataset.en || label;
+        trigger.dataset.ru = clickedOption.dataset.ru || getCurrentRuLabel(filterName, value);
+      }
     }
   }
 
@@ -1048,6 +1068,8 @@ setupRangeFilter({
 });
 
 filterSortTriggerLabel.textContent = 'Newest first';
+filterSortTriggerLabel.dataset.en = 'Newest first';
+filterSortTriggerLabel.dataset.ru = 'Сначала новые';
 
 // Form submission with API
 playerForm.addEventListener('submit', async (event) => {
@@ -1087,7 +1109,7 @@ playerForm.addEventListener('submit', async (event) => {
     }
   } catch (error) {
     console.error('Form submission error:', error);
-    showToast(`Ошибка: ${error.message}`);
+    showToast(`${currentLang === 'ru' ? 'Ошибка' : 'Error'}: ${error.message}`);
   } finally {
     submitFormBtn.disabled = false;
     setFormEditingMode(!!editingPlayerId);
@@ -1122,7 +1144,7 @@ confirmClearBtn.addEventListener('click', async () => {
     showToast(currentLang === 'ru' ? 'Ваши анкеты успешно очищены!' : 'Your profiles cleared successfully!');
   } catch (error) {
     console.error('Error clearing profiles:', error);
-    showToast(`Ошибка: ${error.message}`);
+    showToast(`${currentLang === 'ru' ? 'Ошибка' : 'Error'}: ${error.message}`);
   }
 });
 
@@ -1139,7 +1161,7 @@ editExistingProfileBtn.addEventListener('click', () => {
     return;
   }
 
-  existingProfileTitle.textContent = 'Выберите какую анкету редактировать';
+  existingProfileTitle.textContent = currentLang === 'ru' ? 'Выберите какую анкету редактировать' : 'Choose which profile to edit';
   existingProfileActions.hidden = true;
   editProfileList.hidden = false;
   renderEditableOwnProfiles(ownPlayers);
@@ -1215,7 +1237,7 @@ confirmDeleteProfileBtn.addEventListener('click', async () => {
     showToast(currentLang === 'ru' ? 'Анкета удалена!' : 'Profile deleted!');
   } catch (error) {
     console.error('Error deleting profile:', error);
-    showToast(`Ошибка: ${error.message}`);
+    showToast(`${currentLang === 'ru' ? 'Ошибка' : 'Error'}: ${error.message}`);
   }
 });
 
