@@ -1278,9 +1278,9 @@ async function loadAndRenderPlayers() {
 
     const players = await fetchPlayers(filters);
 
-    // Mark own players
+    // Use isOwn from API response (based on session matching)
     players.forEach(player => {
-      player.isOwn = true;
+      player.isOwn = player.isOwn === true;
     });
 
     allPlayersCache = players;
