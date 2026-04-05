@@ -1,41 +1,7 @@
 const db = require('./pool');
 const { v4: uuidv4 } = require('uuid');
 
-const defaultPlayers = [
-  {
-    nickname: 'EdgarRush',
-    level: 7,
-    age: 19,
-    language: 'RU / EN',
-    role: 'Rifler',
-    style: 'Chill + try win',
-    playtime: '19:00–01:00',
-    discord: '@edgar',
-    bio: 'Ищу адекватных ребят на Faceit 5–8. Без токсика, но на победу.'
-  },
-  {
-    nickname: 'NikoScope',
-    level: 6,
-    age: 21,
-    language: 'RU',
-    role: 'AWP',
-    style: 'Tryhard',
-    playtime: '20:00–02:00',
-    discord: '@nikoscope',
-    bio: 'Ищу duo/trio под вечерний прайм. Нужны коллы и норм микро.'
-  },
-  {
-    nickname: 'CalmEntry',
-    level: 5,
-    age: 18,
-    language: 'EN',
-    role: 'Entry',
-    style: 'Chill',
-    playtime: '18:00–23:00',
-    discord: '@calmentry',
-    bio: 'Play for fun, but no griefing. Looking for non-toxic teammates.'
-  }
-];
+const defaultPlayers = [];
 
 async function seedDatabase() {
   try {

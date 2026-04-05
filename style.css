@@ -150,6 +150,7 @@ body > * {
 .nav-links {
   display: flex;
   gap: 24px;
+  align-items: center;
 }
 
 .nav-links a {
@@ -160,6 +161,25 @@ body > * {
 
 .nav-links a:hover {
   color: var(--text);
+}
+
+.lang-toggle {
+  border: 1px solid var(--card-border);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 6px 14px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.lang-toggle:hover {
+  border-color: var(--accent);
+  background: rgba(34, 211, 197, 0.15);
+  color: var(--accent-strong);
 }
 
 .hero-content {
@@ -1109,11 +1129,13 @@ body > * {
 }
 
 .empty-state {
-  padding: 22px;
+  padding: 40px 22px;
   border-radius: var(--radius);
-  border: 1px dashed rgba(98,245,223,0.28);
-  background: rgba(255,255,255,0.03);
+  border: 2px dashed rgba(98,245,223,0.22);
+  background: rgba(255,255,255,0.02);
   color: var(--muted);
+  text-align: center;
+  font-size: 1.05rem;
 }
 
 .footer {

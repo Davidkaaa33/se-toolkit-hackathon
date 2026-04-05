@@ -17,36 +17,36 @@
 
   <header class="hero">
     <nav class="nav container">
-      <div class="logo">Stack - удобный сервис для поиска тиммейтов в CS2</div>
+      <div class="logo" data-ru="Stack - удобный сервис для поиска тиммейтов в CS2">Stack — find teammates for CS2</div>
       <div class="nav-links">
-        <a href="#how-it-works">Как это работает</a>
-        <a href="#profiles">Игроки</a>
-        <a href="#join">Заполнить анкету</a>
+        <a href="#how-it-works" data-ru="Как это работает">How it works</a>
+        <a href="#profiles" data-ru="Игроки">Players</a>
+        <a href="#join" data-ru="Заполнить анкету">Create profile</a>
+        <button type="button" id="langToggle" class="lang-toggle">EN</button>
       </div>
     </nav>
 
     <div class="hero-content container">
       <div class="hero-text">
-        <h1>Собери нормальный стак и забудь про токсичных рандомов</h1>
-        <p>
-          Stack — это сервис, где игроки могут быстро находить тиммейтов по уровню,
-          роли, языку и вайбу. Достаточно лишь указать информацию о себе и найти подходящих игроков.
+        <h1 data-ru="Собери нормальный стак и забудь про токсичных рандомов">Build your stack and forget about toxic randoms</h1>
+        <p data-ru="Stack — это сервис, где игроки могут быстро находить тиммейтов по уровню, роли, языку и вайбу. Достаточно лишь указать информацию о себе и найти подходящих игроков.">
+          Stack is where players quickly find teammates by skill, role, language, and vibe. Just share your info and find the right players.
         </p>
 
         <div class="hero-points">
           <div class="hero-point">
             <span class="hero-point-dot"></span>
-            <span>Подбор по уровню, роли и стилю игры</span>
+            <span data-ru="Подбор по уровню, роли и стилю игры">Match by level, role, and play style</span>
           </div>
           <div class="hero-point">
             <span class="hero-point-dot"></span>
-            <span>Никакой регистрации и лишних действий</span>
+            <span data-ru="Никакой регистрации и лишних действий">No registration or extra steps</span>
           </div>
         </div>
 
         <div class="hero-buttons">
-          <a class="btn btn-primary" href="#join">Заполнить анкету</a>
-          <a class="btn btn-secondary" href="#profiles">Найти тиммейтов</a>
+          <a class="btn btn-primary" href="#join" data-ru="Заполнить анкету">Create profile</a>
+          <a class="btn btn-secondary" href="#profiles" data-ru="Найти тиммейтов">Find teammates</a>
         </div>
       </div>
 
@@ -55,7 +55,7 @@
         <div class="hero-card">
           <div class="mini-card-header">
             <span class="status-dot"></span>
-            <span>Сейчас ищет пати</span>
+            <span data-ru="Сейчас ищет пати">Looking for teammates now</span>
           </div>
 
           <div class="player-preview">
@@ -68,26 +68,26 @@
 
           <div class="tags">
             <span>RU / EN</span>
-            <span>Chill + try win</span>
-            <span>Mic on</span>
+            <span data-ru="Спокойно + на победу">Chill + try win</span>
+            <span data-ru="Микрофон включен">Mic on</span>
           </div>
 
           <div class="card-stats">
             <div>
               <strong>5–8</strong>
-              <span>lvl Faceit</span>
+              <span data-ru="lvl Faceit">Faceit lvl</span>
             </div>
             <div>
               <strong>RU/EN</strong>
-              <span>язык</span>
+              <span data-ru="язык">language</span>
             </div>
             <div>
               <strong>19:00–01:00</strong>
-              <span>удобное время</span>
+              <span data-ru="удобное время">available time</span>
             </div>
           </div>
 
-          <button class="btn btn-primary full-width" onclick="scrollToForm()">Хочу так же</button>
+          <button class="btn btn-primary full-width" onclick="scrollToForm()" data-ru="Хочу так же">I want this too</button>
         </div>
       </div>
     </div>
@@ -96,25 +96,25 @@
   <main>
     <section id="how-it-works" class="section container">
       <div class="section-heading">
-        <h2>Как это работает</h2>
-        <p>Идея очень простая: игрок оставляет анкету и она сразу появляется в списке ниже.</p>
+        <h2 data-ru="Как это работает">How it works</h2>
+        <p data-ru="Идея очень простая: игрок оставляет анкету и она сразу появляется в списке ниже.">The idea is simple: a player creates a profile and it instantly appears in the list below.</p>
       </div>
 
       <div class="steps">
         <article class="step-card">
           <div class="step-number">1</div>
-          <h3>Заполни анкету</h3>
-          <p>Укажи ник, уровень Faceit, роль, язык, стиль игры и Discord.</p>
+          <h3 data-ru="Заполни анкету">Create your profile</h3>
+          <p data-ru="Укажи ник, уровень Faceit, роль, язык, стиль игры и Discord.">Enter your nickname, Faceit level, role, language, play style, and Discord.</p>
         </article>
         <article class="step-card">
           <div class="step-number">2</div>
-          <h3>Появись в списке</h3>
-          <p>После отправки твоя карточка моментально попадает в общий список игроков.</p>
+          <h3 data-ru="Появись в списке">Appear in the list</h3>
+          <p data-ru="После отправки твоя карточка моментально попадает в общий список игроков.">After submitting, your card instantly appears in the public player list.</p>
         </article>
         <article class="step-card accent-card">
           <div class="step-number">3</div>
-          <h3>Собери свой стак</h3>
-          <p>Другие игроки находят тебя в списке и связываются через Discord.</p>
+          <h3 data-ru="Собери свой стак">Build your stack</h3>
+          <p data-ru="Другие игроки находят тебя в списке и связываются через Discord.">Other players find you in the list and reach out via Discord.</p>
         </article>
       </div>
     </section>
@@ -122,22 +122,22 @@
     <section id="profiles" class="section section-alt">
       <div class="container">
         <div class="section-heading">
-          <h2>Игроки, которые ищут пати</h2>
+          <h2 data-ru="Игроки, которые ищут пати">Players looking for teammates</h2>
         </div>
 
         <div class="profiles-toolbar">
           <div class="profiles-toolbar-top">
-            <button type="button" class="filter-chip" id="filterOwnBtn">Только мои анкеты</button>
+            <button type="button" class="filter-chip" id="filterOwnBtn" data-ru="Только мои анкеты">Only my profiles</button>
           </div>
 
           <div class="profiles-toolbar-bottom">
             <div class="filters">
             <div class="filter-dropdown" data-filter-dropdown="language">
               <button type="button" class="filter-trigger" id="filterLanguageTrigger" data-filter-trigger="language">
-                <span>Все языки</span>
+                <span data-ru="Все языки">All languages</span>
               </button>
               <div class="filter-menu" id="filterLanguageMenu" hidden>
-                <button type="button" class="filter-option is-selected" data-filter-name="language" data-value="all">Все языки</button>
+                <button type="button" class="filter-option is-selected" data-filter-name="language" data-value="all" data-ru="Все языки">All languages</button>
                 <button type="button" class="filter-option" data-filter-name="language" data-value="RU">RU</button>
                 <button type="button" class="filter-option" data-filter-name="language" data-value="EN">EN</button>
                 <button type="button" class="filter-option" data-filter-name="language" data-value="RU / EN">RU / EN</button>
@@ -146,10 +146,10 @@
 
             <div class="filter-dropdown" data-filter-dropdown="role">
               <button type="button" class="filter-trigger" id="filterRoleTrigger" data-filter-trigger="role">
-                <span>Все роли</span>
+                <span data-ru="Все роли">All roles</span>
               </button>
               <div class="filter-menu" id="filterRoleMenu" hidden>
-                <button type="button" class="filter-option is-selected" data-filter-name="role" data-value="all">Все роли</button>
+                <button type="button" class="filter-option is-selected" data-filter-name="role" data-value="all" data-ru="Все роли">All roles</button>
                 <button type="button" class="filter-option" data-filter-name="role" data-value="Entry">Entry</button>
                 <button type="button" class="filter-option" data-filter-name="role" data-value="Rifler">Rifler</button>
                 <button type="button" class="filter-option" data-filter-name="role" data-value="AWP">AWP</button>
@@ -161,10 +161,10 @@
 
             <div class="filter-dropdown" data-filter-dropdown="style">
               <button type="button" class="filter-trigger" id="filterStyleTrigger" data-filter-trigger="style">
-                <span>Любой стиль</span>
+                <span data-ru="Любой стиль">Any style</span>
               </button>
               <div class="filter-menu" id="filterStyleMenu" hidden>
-                <button type="button" class="filter-option is-selected" data-filter-name="style" data-value="all">Любой стиль</button>
+                <button type="button" class="filter-option is-selected" data-filter-name="style" data-value="all" data-ru="Любой стиль">Any style</button>
                 <button type="button" class="filter-option" data-filter-name="style" data-value="Chill">Chill</button>
                 <button type="button" class="filter-option" data-filter-name="style" data-value="Tryhard">Tryhard</button>
                 <button type="button" class="filter-option" data-filter-name="style" data-value="Chill + try win">Chill + try win</button>
@@ -173,27 +173,27 @@
 
             <div class="filter-dropdown age-filter-dropdown" data-filter-dropdown="level">
               <button type="button" class="filter-trigger" id="filterLevelTrigger" data-filter-trigger="level">
-                <span>Level faceit</span>
+                <span data-ru="Level faceit">Faceit level</span>
               </button>
               <div class="filter-menu age-filter-menu" id="filterLevelMenu" hidden>
                 <div class="age-filter">
-                  <input type="number" id="filterLevelMin" min="0" max="10" placeholder="От" />
-                  <input type="number" id="filterLevelMax" min="0" max="10" placeholder="До" />
+                  <input type="number" id="filterLevelMin" min="0" max="10" placeholder="From" data-placeholder-ru="От" />
+                  <input type="number" id="filterLevelMax" min="0" max="10" placeholder="To" data-placeholder-ru="До" />
                 </div>
-                <button type="button" class="age-filter-reset" id="filterLevelReset">Сбросить</button>
+                <button type="button" class="age-filter-reset" id="filterLevelReset" data-ru="Сбросить">Reset</button>
               </div>
             </div>
 
             <div class="filter-dropdown age-filter-dropdown" data-filter-dropdown="age">
               <button type="button" class="filter-trigger" id="filterAgeTrigger" data-filter-trigger="age">
-                <span>Возраст</span>
+                <span data-ru="Возраст">Age</span>
               </button>
               <div class="filter-menu age-filter-menu" id="filterAgeMenu" hidden>
                 <div class="age-filter">
-                  <input type="number" id="filterAgeMin" min="0" max="99" placeholder="От" />
-                  <input type="number" id="filterAgeMax" min="0" max="99" placeholder="До" />
+                  <input type="number" id="filterAgeMin" min="0" max="99" placeholder="From" data-placeholder-ru="От" />
+                  <input type="number" id="filterAgeMax" min="0" max="99" placeholder="To" data-placeholder-ru="До" />
                 </div>
-                <button type="button" class="age-filter-reset" id="filterAgeReset">Сбросить</button>
+                <button type="button" class="age-filter-reset" id="filterAgeReset" data-ru="Сбросить">Reset</button>
               </div>
             </div>
             </div>
@@ -201,14 +201,14 @@
             <div class="sort-controls">
               <div class="filter-dropdown sort-dropdown" data-filter-dropdown="sort">
                 <button type="button" class="filter-trigger" id="filterSortTrigger" data-filter-trigger="sort">
-                  <span>Сортировка</span>
+                  <span data-ru="Сортировка">Sort</span>
                 </button>
                 <div class="filter-menu" id="filterSortMenu" hidden>
-                  <button type="button" class="filter-option is-selected" data-filter-name="sort" data-value="default">Сначала новые</button>
-                  <button type="button" class="filter-option" data-filter-name="sort" data-value="age-desc">Возраст: сначала старше</button>
-                  <button type="button" class="filter-option" data-filter-name="sort" data-value="age-asc">Возраст: сначала младше</button>
-                  <button type="button" class="filter-option" data-filter-name="sort" data-value="level-desc">Faceit: высокий level</button>
-                  <button type="button" class="filter-option" data-filter-name="sort" data-value="level-asc">Faceit: низкий level</button>
+                  <button type="button" class="filter-option is-selected" data-filter-name="sort" data-value="default" data-en="Newest first" data-ru="Сначала новые">Newest first</button>
+                  <button type="button" class="filter-option" data-filter-name="sort" data-value="age-desc" data-en="Age: oldest first" data-ru="Возраст: сначала старше">Age: oldest first</button>
+                  <button type="button" class="filter-option" data-filter-name="sort" data-value="age-asc" data-en="Age: youngest first" data-ru="Возраст: сначала младше">Age: youngest first</button>
+                  <button type="button" class="filter-option" data-filter-name="sort" data-value="level-desc" data-en="Faceit: highest level" data-ru="Faceit: высокий level">Faceit: highest level</button>
+                  <button type="button" class="filter-option" data-filter-name="sort" data-value="level-asc" data-en="Faceit: lowest level" data-ru="Faceit: низкий level">Faceit: lowest level</button>
                 </div>
               </div>
             </div>
@@ -221,29 +221,29 @@
 
     <section id="join" class="section container">
       <div class="section-heading">
-        <h2>Заполнить анкету</h2>
+        <h2 data-ru="Заполнить анкету">Create profile</h2>
       </div>
 
       <form id="playerForm" class="player-form" novalidate>
         <div class="form-grid">
           <label>
-            Никнейм
-            <input type="text" id="nickname" placeholder="Например, EdgarRush" required />
+            <span data-ru="Никнейм">Nickname</span>
+            <input type="text" id="nickname" placeholder="e.g. EdgarRush" data-placeholder-ru="Например, EdgarRush" required />
           </label>
 
           <label>
-            Faceit Level
-            <input type="number" id="level" min="0" max="10" placeholder="От 0 до 10" required />
+            <span data-ru="Faceit Level">Faceit Level</span>
+            <input type="number" id="level" min="0" max="10" placeholder="0 to 10" data-placeholder-ru="От 0 до 10" required />
           </label>
 
           <label>
-            Возраст
-            <input type="number" id="age" min="0" max="99" placeholder="Например, 19" required />
+            <span data-ru="Возраст">Age</span>
+            <input type="number" id="age" min="0" max="99" placeholder="e.g. 19" data-placeholder-ru="Например, 19" required />
           </label>
 
           <div class="form-field">
-            <span>Язык</span>
-            <div class="language-buttons" role="group" aria-label="Выбор языка">
+            <span data-ru="Язык">Language</span>
+            <div class="language-buttons" role="group" aria-label="Language selection">
               <button type="button" class="language-btn" data-language="RU">RU</button>
               <button type="button" class="language-btn" data-language="EN">EN</button>
               <button type="button" class="language-btn" data-language="RU / EN">RU / EN</button>
@@ -253,8 +253,8 @@
           </div>
 
           <div class="form-field">
-            <span>Роль в игре</span>
-            <div class="role-buttons" role="group" aria-label="Выбор роли">
+            <span data-ru="Роль в игре">In-game role</span>
+            <div class="role-buttons" role="group" aria-label="Role selection">
               <button type="button" class="role-btn" data-role="Entry">Entry</button>
               <button type="button" class="role-btn" data-role="Rifler">Rifler</button>
               <button type="button" class="role-btn" data-role="AWP">AWP</button>
@@ -266,8 +266,8 @@
           </div>
 
           <div class="form-field">
-            <span>Стиль игры</span>
-            <div class="style-buttons" role="group" aria-label="Выбор стиля игры">
+            <span data-ru="Стиль игры">Play style</span>
+            <div class="style-buttons" role="group" aria-label="Play style selection">
               <button type="button" class="style-btn" data-style="Chill">Chill</button>
               <button type="button" class="style-btn" data-style="Tryhard">Tryhard</button>
               <button type="button" class="style-btn" data-style="Chill + try win">Chill + try win</button>
@@ -277,38 +277,38 @@
           </div>
 
           <label>
-            Игровое время
+            <span data-ru="Игровое время">Available time</span>
             <div class="input-with-action">
               <div class="playtime-group" id="playtimeGroup">
-                <input type="text" id="playtimeStartHour" class="playtime-part" inputmode="numeric" maxlength="2" placeholder="ЧЧ" value="00" aria-label="Часы начала" />
+                <input type="text" id="playtimeStartHour" class="playtime-part" inputmode="numeric" maxlength="2" placeholder="HH" data-placeholder-ru="ЧЧ" value="00" aria-label="Start hour" />
                 <span class="playtime-separator">:</span>
-                <input type="text" id="playtimeStartMinute" class="playtime-part" inputmode="numeric" maxlength="2" placeholder="ММ" value="00" aria-label="Минуты начала" />
+                <input type="text" id="playtimeStartMinute" class="playtime-part" inputmode="numeric" maxlength="2" placeholder="MM" value="00" aria-label="Start minute" />
                 <span class="playtime-separator">-</span>
-                <input type="text" id="playtimeEndHour" class="playtime-part" inputmode="numeric" maxlength="2" placeholder="ЧЧ" value="00" aria-label="Часы конца" />
+                <input type="text" id="playtimeEndHour" class="playtime-part" inputmode="numeric" maxlength="2" placeholder="HH" data-placeholder-ru="ЧЧ" value="00" aria-label="End hour" />
                 <span class="playtime-separator">:</span>
-                <input type="text" id="playtimeEndMinute" class="playtime-part" inputmode="numeric" maxlength="2" placeholder="ММ" value="00" aria-label="Минуты конца" />
+                <input type="text" id="playtimeEndMinute" class="playtime-part" inputmode="numeric" maxlength="2" placeholder="MM" value="00" aria-label="End minute" />
               </div>
-              <button type="button" class="inline-action-btn is-active" id="playtimeAnyBtn">Любое</button>
+              <button type="button" class="inline-action-btn is-active" id="playtimeAnyBtn" data-ru="Любое">Any</button>
             </div>
             <span id="playtimeError" class="choice-error" aria-live="polite"></span>
             <input type="hidden" id="playtime" value="" required />
           </label>
 
           <label>
-            Discord
-            <input type="text" id="discord" placeholder="Например, @edgar" required />
+            <span>Discord</span>
+            <input type="text" id="discord" placeholder="e.g. @edgar" data-placeholder-ru="Например, @edgar" required />
           </label>
         </div>
 
         <label>
-          Коротко о себе
-          <textarea id="bio" rows="4" placeholder="Например: Ищу не токсичных ребят на Faceit 5–8, играю спокойно, но на победу"></textarea>
+          <span data-ru="Коротко о себе">Short bio</span>
+          <textarea id="bio" rows="4" placeholder="e.g. Looking for non-toxic players on Faceit 5-8, chill but competitive" data-placeholder-ru="Например: Ищу не токсичных ребят на Faceit 5–8, играю спокойно, но на победу"></textarea>
         </label>
 
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary" id="submitFormBtn">Добавить анкету</button>
-          <button type="button" class="btn btn-secondary" id="clearDataBtn">Очистить мои анкеты</button>
-          <button type="button" class="btn btn-secondary" id="cancelEditBtn" hidden>Отменить редактирование</button>
+          <button type="submit" class="btn btn-primary" id="submitFormBtn" data-ru="Добавить анкету">Add profile</button>
+          <button type="button" class="btn btn-secondary" id="clearDataBtn" data-ru="Очистить мои анкеты">Clear my profiles</button>
+          <button type="button" class="btn btn-secondary" id="cancelEditBtn" hidden data-ru="Отменить редактирование">Cancel editing</button>
         </div>
       </form>
     </section>
@@ -318,13 +318,13 @@
     <div class="container footer-inner">
       <div>
         <strong>Stack</strong>
-        <p>Сервис для поиска тиммейтов в CS2</p>
+        <p data-ru="Сервис для поиска тиммейтов в CS2">A service for finding CS2 teammates</p>
       </div>
       <div class="footer-contacts">
-        <strong>Контакты:</strong>
+        <strong data-ru="Контакты:">Contacts:</strong>
         <div class="footer-contacts-links">
           <a href="tel:+79504628262">+7(950)462-82-62</a>
-          <a href="mailto:davuska06.david@yandex.ru">davuska06.david@yandex.ru</a>
+          <a href="mailto:d.danielian@innopolis.university">d.danielian@innopolis.university</a>
           <a href="https://discord.com/users/Davidkaaa33" target="_blank" rel="noreferrer">Discord: Davidkaaa33</a>
           <a href="https://t.me/Dava_Djan" target="_blank" rel="noreferrer">t.me/Dava_Djan</a>
         </div>
@@ -335,10 +335,10 @@
   <div class="confirm-modal" id="clearConfirmModal" hidden>
     <div class="confirm-modal-backdrop" data-close-modal="true"></div>
     <div class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="clearConfirmTitle">
-      <h3 id="clearConfirmTitle">Уверены, что хотите удалить все свои анкеты?</h3>
+      <h3 id="clearConfirmTitle" data-ru="Уверены, что хотите удалить все свои анкеты?">Sure you want to delete all your profiles?</h3>
       <div class="confirm-actions">
-        <button type="button" class="btn btn-primary" id="cancelClearBtn">Нет</button>
-        <button type="button" class="btn btn-secondary" id="confirmClearBtn">Да</button>
+        <button type="button" class="btn btn-primary" id="cancelClearBtn" data-ru="Нет">No</button>
+        <button type="button" class="btn btn-secondary" id="confirmClearBtn" data-ru="Да">Yes</button>
       </div>
     </div>
   </div>
@@ -346,10 +346,10 @@
   <div class="confirm-modal" id="existingProfileModal" hidden>
     <div class="confirm-modal-backdrop" data-close-existing-modal="true"></div>
     <div class="confirm-dialog existing-profile-dialog" role="dialog" aria-modal="true" aria-labelledby="existingProfileTitle">
-      <h3 id="existingProfileTitle">У Вас уже есть анкеты</h3>
+      <h3 id="existingProfileTitle" data-ru="У Вас уже есть анкеты">You already have profiles</h3>
       <div class="confirm-actions" id="existingProfileActions">
-        <button type="button" class="btn btn-secondary" id="editExistingProfileBtn">Редактировать старую</button>
-        <button type="button" class="btn btn-secondary" id="createNewProfileBtn">Создать новую</button>
+        <button type="button" class="btn btn-secondary" id="editExistingProfileBtn" data-ru="Редактировать старую">Edit existing</button>
+        <button type="button" class="btn btn-secondary" id="createNewProfileBtn" data-ru="Создать новую">Create new</button>
       </div>
       <div class="edit-profile-list" id="editProfileList" hidden></div>
     </div>
@@ -365,10 +365,10 @@
   <div class="confirm-modal" id="deleteProfileModal" hidden>
     <div class="confirm-modal-backdrop" data-close-delete-profile="true"></div>
     <div class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="deleteProfileTitle">
-      <h3 id="deleteProfileTitle">Уверены, что хотите удалить анкету?</h3>
+      <h3 id="deleteProfileTitle" data-ru="Уверены, что хотите удалить анкету?">Sure you want to delete this profile?</h3>
       <div class="confirm-actions">
-        <button type="button" class="btn btn-primary" id="cancelDeleteProfileBtn">Нет</button>
-        <button type="button" class="btn btn-secondary" id="confirmDeleteProfileBtn">Да</button>
+        <button type="button" class="btn btn-primary" id="cancelDeleteProfileBtn" data-ru="Нет">No</button>
+        <button type="button" class="btn btn-secondary" id="confirmDeleteProfileBtn" data-ru="Да">Yes</button>
       </div>
     </div>
   </div>
